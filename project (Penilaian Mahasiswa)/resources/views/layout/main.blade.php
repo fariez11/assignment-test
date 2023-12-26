@@ -120,8 +120,6 @@
     <script src="{{ asset('custom.js') }}"></script>
     <script src="{{ asset('helper/datatable.js') }}"></script>
 
-
-
     @stack('scripts')
     {{-- @stack('scripts_includes') --}}
 

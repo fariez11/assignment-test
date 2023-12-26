@@ -40,6 +40,10 @@ class LoginController extends Controller
                 $sesi = User::with('dosen')->where('username',$request->user()->username)->first();
                 $request->session()->put('sesi',$sesi->dosen->id);
                 $request->session()->put('nama',$sesi->dosen->nama);
+            }else if($request->user()->role == 'mahasiswa'){
+                $sesi = User::with('mahasiswa')->where('username',$request->user()->username)->first();
+                $request->session()->put('id',$sesi->mahasiswa->id);
+                $request->session()->put('nama',$sesi->mahasiswa->nama);
             }
 
             return redirect()->intended('dashboard');

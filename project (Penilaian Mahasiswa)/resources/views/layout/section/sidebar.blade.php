@@ -47,9 +47,16 @@
                     </li>
                 @elseif( session()->get('role') == 'dosen')
                     <li class="nav-item">
-                        <a href="{{ route('nilai.index') }}" class="nav-link @yield('nilai' ?? '')">
+                        <a href="{{ route('penilaian.index') }}" class="nav-link @yield('nilai' ?? '')">
                             <i class="nav-icon fas fa-award"></i>
                             <p>Data Nilai Mahasiswa</p>
+                        </a>
+                    </li>
+                @elseif( session()->get('role') == 'mahasiswa')
+                    <li class="nav-item">
+                        <a href="{{ route('nilai.index') }}" class="nav-link @yield('nilai' ?? '')">
+                            <i class="nav-icon fas fa-award"></i>
+                            <p>Data Nilai</p>
                         </a>
                     </li>
                 @endif

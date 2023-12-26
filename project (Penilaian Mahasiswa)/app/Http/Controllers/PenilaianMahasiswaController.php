@@ -72,7 +72,7 @@ class PenilaianMahasiswaController extends Controller
         // dd($validated);
 
         Nilai::create([
-            'dosenId' => 2,
+            'dosenId' => $request->session()->get('sesi'),
             'mahasiswaId' => $request->mahasiswaId,
             'matkulId' => $request->matkul,
             'tugas1' => $request->tugas1,
