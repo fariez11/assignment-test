@@ -55,13 +55,12 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'is_dosen']], function () {
-    Route::get('/mahasiswa/jurusan', [PenilaianMahasiswaController::class, 'index'])->name('nilai.index');
-    Route::get('/mahasiswa/matkul/{id}', [PenilaianMahasiswaController::class, 'matkul'])->name('nilai.matkul');
-    Route::get('/mahasiswa/nilai/{jurusan}/{matkul}', [PenilaianMahasiswaController::class, 'mahasiswa'])->name('nilai.mahasiswa');
+    Route::get('/mahasiswa/jurusan', [PenilaianMahasiswaController::class, 'index'])->name('penilaian.index');
+    Route::get('/mahasiswa/matkul/{id}', [PenilaianMahasiswaController::class, 'matkul'])->name('penilaian.matkul');
+    Route::get('/mahasiswa/nilai/{jurusan}/{matkul}', [PenilaianMahasiswaController::class, 'mahasiswa'])->name('penilaian.mahasiswa');
 
-    Route::post('/mahasiswa/nilai/create', [PenilaianMahasiswaController::class, 'store'])->name('nilai.store');
-    Route::post('/mahasiswa/nilai/edit/{id}', [PenilaianMahasiswaController::class, 'update'])->name('nilai.update');
-    Route::delete('/mahasiswa/nilai/delete/{id}', [PenilaianMahasiswaController::class, 'destroy'])->name('nilai.delete');
+    Route::post('/mahasiswa/nilai/create', [PenilaianMahasiswaController::class, 'store'])->name('penilaian.store');
+    Route::post('/mahasiswa/nilai/edit/{id}', [PenilaianMahasiswaController::class, 'update'])->name('penilaian.update');
 });
 
 // Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');

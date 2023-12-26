@@ -7,7 +7,7 @@ use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class PenilaianMahasiswaController extends Controller
 {
@@ -24,33 +24,34 @@ class PenilaianMahasiswaController extends Controller
         //     ->where('mst_matkul.deleted_at', null)
         //     ->get();
 
-        $jurusan = Jurusan::where('deleted_at',null)->get();
+        $jurusan = Jurusan::where('deleted_at', null)->get();
 
         return view('penilaian.index', [
-            'jurusans' => $jurusan
+            'jurusans' => $jurusan,
         ]);
     }
 
     public function matkul($id)
     {
-        $matkul = MataKuliah::where('jurusanId',$id)->where('deleted_at',null)->get();
+        $matkul = MataKuliah::where('jurusanId', $id)->where('deleted_at', null)->get();
 
         return view('penilaian.matkul', [
             'matkuls' => $matkul,
-            'jurusan_id' => $id
+            'jurusan_id' => $id,
         ]);
     }
 
-    public function mahasiswa($jurusan,$matkulId)
+    public function mahasiswa($jurusan, $matkulId)
     {
-        $matkul = Nilai::has('Mahasiswa')->where('matkulId',$matkulId)->get();
-        // $mahasiswa = Mahasiswa::where('jurusanId',$jurusan)->exists();
-        $mahasiswa = Mahasiswa::doesntHave('Nilai')->where('jurusanId',$jurusan)->get();
+        $nilai = Nilai::with(['Mahasiswa', 'Matkul'])->where('matkulId', $matkulId)->get();
+        $matkul = MataKuliah::where('id', $matkulId)->first();
+        $mahasiswa = Mahasiswa::where('jurusanId',$jurusan)->get();
 
         return view('penilaian.nilai', [
             'jurusan_id' => $jurusan,
             'matkul_id' => $matkulId,
-            'nilai' => $matkul,
+            'nilai' => $nilai,
+            'matakuliah' => $matkul,
             'mahasiswa' => $mahasiswa,
         ]);
     }
@@ -79,10 +80,10 @@ class PenilaianMahasiswaController extends Controller
             'UTS' => $request->uts,
             'tugas3' => $request->tugas3,
             'tugas4' => $request->tugas4,
-            'UAS' => $request->uas
+            'UAS' => $request->uas,
         ]);
 
-        return redirect()->route('nilai.mahasiswa',[$request->jurusan,$request->matkul]);
+        return redirect()->route('penilaian.mahasiswa', [$request->jurusan, $request->matkul]);
 
     }
 
@@ -98,7 +99,23 @@ class PenilaianMahasiswaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'mahasiswaId' => 'required',
+            'tugas1' => 'required',
+        ]);
 
+        $update = Nilai::findOrFail($id);
+
+        $update->update([
+            'tugas1' => $request->tugas1,
+            'tugas2' => $request->tugas2,
+            'UTS' => $request->uts,
+            'tugas3' => $request->tugas3,
+            'tugas4' => $request->tugas4,
+            'UAS' => $request->uas,
+        ]);
+
+        return redirect()->route('penilaian.mahasiswa', [$request->jurusan, $request->matkul]);
     }
 
     public function destroy($id)

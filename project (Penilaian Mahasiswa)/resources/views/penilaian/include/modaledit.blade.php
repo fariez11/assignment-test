@@ -5,7 +5,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Edit data mata nilai</h4>
                 </div>
-                <form action="{{ route('nilai.update',$edit->id) }}" method="POST"
+                <form action="{{ route('penilaian.update',$edit->id) }}" method="POST"
                     class="form-validate"enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">

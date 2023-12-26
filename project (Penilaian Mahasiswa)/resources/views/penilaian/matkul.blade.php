@@ -27,7 +27,7 @@
                             </div> --}}
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{ route('nilai.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('penilaian.index') }}" class="btn btn-secondary">
                                 <i data-feather="arrow-left-circle" class="feather-18"></i>
                             kembali
                             </a>
@@ -45,7 +45,7 @@
                                             <td> {{ $loop->iteration }} </td>
                                             <td> {{ $matkul->matkul }} </td>
                                             <td style="width: 90px;">
-                                                <a href="{{ route('nilai.mahasiswa',[$jurusan_id, $matkul->id]) }}" class="btn btn-default">
+                                                <a href="{{ route('penilaian.mahasiswa',[$jurusan_id, $matkul->id]) }}" class="btn btn-default">
                                                     <i data-feather="users" class="feather-15"></i>
                                                 </a>
                                             </td>

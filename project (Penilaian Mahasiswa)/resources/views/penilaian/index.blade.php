@@ -42,7 +42,7 @@
                                             <td style="width: 40px;"> {{ $loop->iteration }} </td>
                                             <td> {{ $jurusan->namaJurusan }} </td>
                                             <td style="width: 40px;">
-                                                <a href="{{ route('nilai.matkul', $jurusan->id) }}" class="btn btn-default">
+                                                <a href="{{ route('penilaian.matkul', $jurusan->id) }}" class="btn btn-default">
                                                     <i data-feather="list" class="feather-15"></i>
                                                 </a>
                                             </td>

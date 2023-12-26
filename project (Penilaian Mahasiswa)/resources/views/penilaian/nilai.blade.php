@@ -27,7 +27,7 @@
                             </div> --}}
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{ route('nilai.matkul',$jurusan_id) }}" class="btn btn-secondary">
+                            <a href="{{ route('penilaian.matkul',$jurusan_id) }}" class="btn btn-secondary">
                                 <i data-feather="arrow-left-circle" class="feather-18"></i>
                             kembali
                             </a>

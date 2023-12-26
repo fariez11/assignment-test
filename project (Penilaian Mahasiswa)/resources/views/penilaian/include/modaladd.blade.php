@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Tambah data mata nilai</h4>
             </div>
-            <form action="{{ route('nilai.store') }}" method="POST" class="form-validate" enctype="multipart/form-data">
+            <form action="{{ route('penilaian.store') }}" method="POST" class="form-validate" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
 
